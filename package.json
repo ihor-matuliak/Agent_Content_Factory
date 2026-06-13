@@ -1,0 +1,27 @@
+{
+  "name": "ai-agent-swarm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent Content Factory — a swarm of AI agents for managing social media content.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently --raw --kill-others \"npm:dev:backend\" \"npm:dev:dashboard\"",
+    "dev:backend": "npm run dev --workspace @swarm/backend",
+    "dev:dashboard": "npm run dev --workspace @swarm/dashboard",
+    "typecheck": "npm run typecheck --workspace @swarm/backend && npm run typecheck --workspace @swarm/dashboard",
+    "db:setup": "bash db/setup.sh",
+    "db:seed": "bash db/seed.sh",
+    "db:migrate": "bash db/migrate.sh",
+    "db:reset": "bash db/reset.sh",
+    "telegram:chat-id": "npm run telegram:chat-id --workspace @swarm/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.0"
+  }
+}
